@@ -1,0 +1,89 @@
+<%- include('head') %>
+<%- include('navbar') %>
+
+<style>
+    /* ส่วนควบคุมให้ Footer ชิดขอบล่างเสมอ */
+    .page-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 80vh; /* กำหนดความสูงขั้นต่ำเพื่อให้ดัน Footer ลงไป */
+    }
+    .content-wrap {
+        flex: 1; /* ส่วนนี้จะยืดตัวออกเพื่อดัน Footer */
+    }
+    .about-card {
+        border-radius: 20px;
+        background: #ffffff;
+        transition: transform 0.3s ease;
+    }
+    .about-card:hover {
+        transform: translateY(-5px);
+    }
+    .icon-box {
+        width: 50px;
+        height: 50px;
+        background: #f0f7ff;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #007bff;
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="page-container">
+    <div class="content-wrap">
+        <div class="container mt-5 mb-5">
+            <div class="about-card shadow-sm border-0 p-5">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h2 class="text-primary fw-bold mb-4">🏢 ความเป็นมาของ ETech</h2>
+                        <p class="lead text-muted" style="line-height: 1.8;">
+                            เราคือผู้นำเข้าอุปกรณ์เทคโนโลยีระดับพรีเมียมที่ก่อตั้งขึ้นเพื่อส่งต่อเทคโนโลยีที่ดีที่สุดจากทั่วทุกมุมโลกสู่มือคุณ 
+                            เราคัดสรรเฉพาะแบรนด์ชั้นนำ เช่น <strong>Logitech</strong> ที่เน้นประสิทธิภาพและความทนทาน
+                        </p>
+                    </div>
+                    <div class="col-lg-4 text-center d-none d-lg-block">
+                        <img src="/images/home/Etechs.png" alt="Logo" class="img-fluid" style="max-height: 150px; opacity: 0.8;">
+                    </div>
+                </div>
+                
+                <hr class="my-5">
+
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="icon-box">
+                            <i class="bi bi-geo-alt-fill fs-4"></i>
+                        </div>
+                        <h4 class="fw-bold">📍 ที่อยู่บริษัท</h4>
+                        <p class="text-secondary">123 ถนนเทคโนโลยี แขวงไอที เขตดิจิทัล กรุงเทพฯ 10XXX</p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="icon-box">
+                            <i class="bi bi-headset fs-4"></i>
+                        </div>
+                        <h4 class="fw-bold">📞 ช่องทางการติดต่อ</h4>
+                        <p class="text-secondary">
+                            <strong>Email:</strong> support@etechs.com<br>
+                            <strong>Tel:</strong> +66 2 123 4567<br>
+                            <strong>Line:</strong> @ETech_Official
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-5 p-4 bg-light rounded-3">
+                    <h5 class="fw-bold text-danger mb-3"><i class="bi bi-shield-check"></i> มาตรฐานการบริการ</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">✅ สินค้าแท้ 100% รับประกันศูนย์</li>
+                        <li class="mb-2">✅ บริการตรวจสอบสภาพสินค้าฟรีตลอดอายุการใช้งาน</li>
+                        <li>✅ เปลี่ยนสินค้าใหม่ภายใน 7 วันหากพบปัญหาจากการผลิต</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <%- include('footer') %>
+</div>

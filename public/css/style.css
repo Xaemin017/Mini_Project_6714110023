@@ -1,0 +1,316 @@
+/* สไตล์พื้นฐาน */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* กำหนด container ให้เนื้อหาดูเป็นระเบียบ */
+.container {
+    width: 80%;
+    margin: 30px auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* สไตล์หัวข้อ */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* ปุ่มเพิ่มการขาย */
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #218838;
+}
+
+/* ตารางแสดงข้อมูล */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* กำหนดขนาด container */
+.container {
+    width: 50%;
+    margin: 30px auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* สไตล์หัวข้อ */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* จัดรูปแบบกล่องป้อนข้อมูล */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* ปุ่มกด */
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #10b807;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* ปุ่ม Cancel */
+.btn-cancel {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #dc3545;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.btn-cancel:hover {
+    background-color: #c82333;
+}
+
+/* ฟอร์มกรองช่วงเวลา */
+.date-filter {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.date-filter label {
+    font-weight: bold;
+}
+
+.date-filter input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.date-filter button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.date-filter button:hover {
+    background-color: #0056b3;
+}
+
+/* กำหนดพื้นที่ว่างด้านบนสำหรับ div.form-group */
+.form-group {
+    margin-top: 20px; /* ปรับค่าตามที่ต้องการ */
+}
+
+.error {
+    background-color: #f8d7da; /* สีแดงอ่อน */
+    color: #721c24;           /* สีตัวอักษรแดงเข้ม */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #f5c6cb;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+
+
+/* --- ส่วนเพิ่มเติมสำหรับ Navbar & Smooth Dropdown --- */
+
+/* ปรับแต่ง Navbar Dropdown ให้ค่อยๆ เลื่อนลง (Smooth) */
+.navbar-nav .dropdown-menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px); /* เลื่อนลงมานิดนึงก่อนแสดงผล */
+    transition: all 0.3s ease-in-out;
+    border: none;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* เพิ่มเงาให้ดูมีมิติ */
+}
+
+/* แสดง Dropdown เมื่อ Hover หรือ Click */
+.navbar-nav .nav-item.dropdown:hover .dropdown-menu,
+.navbar-nav .nav-item.dropdown.show .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* ตกแต่งรายการใน Dropdown */
+.dropdown-item {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #555;
+    transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #007bff;
+    padding-left: 25px; /* เอฟเฟกต์ขยับตัวอักษรตอนเลือก */
+}
+
+/* Badge แสดง Role (Owner/Staff) ให้ดูเด่นขึ้น */
+.badge-light {
+    background-color: #e9ecef;
+    color: #495057;
+    font-size: 0.7rem;
+    padding: 3px 7px;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+/* ปรับแต่ง Logo ใน Navbar */
+.navbar-brand img {
+    height: 40px; /* คุมขนาดโลโก้ */
+    width: auto;
+}
+
+/* Responsive สำหรับตารางในมือถือ */
+@media (max-width: 768px) {
+    .container {
+        width: 95%; /* ขยาย Container ให้เต็มจอในมือถือ */
+    }
+    table {
+        display: block;
+        overflow-x: auto; /* เลื่อนซ้ายขวาได้ถ้าตารางกว้างเกิน */
+    }
+}
+
+/* ทำให้ Dropdown แสดงเมื่อ Hover (สำหรับ Desktop) */
+@media (min-width: 768px) {
+    .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: all 0.3s ease;
+    }
+
+    .navbar-nav .dropdown-menu {
+        display: block; /* ต้องเปิดเป็น block ไว้เพื่อให้ transition ทำงาน */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(15px);
+        transition: all 0.3s ease;
+    }
+}
+
+/* ตกแต่งหน้าตาเมนู */
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #007bff;
+    padding-left: 1.5rem;
+}
+/* ปรับระยะห่างระหว่างเมนูใน Navbar */
+.navbar-nav .nav-link {
+    padding-left: 20px !important;  /* ปรับตัวเลขตามความต้องการ */
+    padding-right: 20px !important;
+    transition: color 0.3s ease;    /* เพิ่มความ Smooth เวลาเอาเมาส์ไปชี้ */
+}
+
+/* แถม: เมื่อเอาเมาส์ชี้ ให้สีสว่างขึ้นหน่อย */
+.navbar-nav .nav-link:hover {
+    color: #ffffff !important;
+}
+
+
+/* สร้าง Class ใหม่สำหรับปุ่ม ETech */
+.btn-etech {
+    background-color: #b3002b !important; 
+    color: white !important;
+    border: none;
+    border-radius: 10px; /* ปรับให้โค้งมนตามปุ่มเดิม */
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+/* เอฟเฟกต์เมื่อเอาเมาส์ไปชี้ */
+.btn-etech:hover {
+    background-color: #8c0022 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(179, 0, 43, 0.3);
+}
+
+
+
+/* สร้าง Class ใหม่สำหรับปุ่ม ETech */
+.btn-etechS {
+    background-color: #FFB300 !important; /* สีเดียวกับ Logo */
+    color: white !important;
+    border: none;
+    border-radius: 10px; /* ปรับให้โค้งมนตามปุ่มเดิม */
+    transition: all 0.3s ease;
+    font-weight: bold;
+}

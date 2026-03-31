@@ -1,0 +1,77 @@
+<%- include('head') %>
+<%- include('navbar') %>
+
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <div class="card shadow-sm border-0 p-3">
+                <img src="/images/products/<%= product.image %>" 
+                     class="img-fluid rounded" 
+                     alt="<%= product.name %>"
+                     style="max-height: 450px; object-fit: contain;">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent p-0">
+                    <li class="breadcrumb-item"><a href="/">หน้าแรก</a></li>
+                    <li class="breadcrumb-item active"><%= product.brand %></li>
+                </ol>
+            </nav>
+
+            <h1 class="fw-bold mb-3"><%= product.name %></h1>
+            
+            <div class="mb-4">
+                <span class="text-muted">ยี่ห้อ: <strong><%= product.brand %></strong></span>
+            </div>
+
+            <div class="mb-4">
+                <% if (product.oldPrice && product.oldPrice > product.price) { %>
+                    <small class="text-danger text-decoration-line-through">฿<%= product.oldPrice.toLocaleString() %></small>
+                <% } %>
+                <h2 class="text-primary fw-bold">฿<%= product.price.toLocaleString() %></h2>
+            </div>
+
+            <hr>
+
+            <form action="/cart/add" method="POST" class="mt-4">
+                <input type="hidden" name="productId" value="<%= product._id %>">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="quantity" class="col-form-label">จำนวน:</label>
+                    </div>
+                    <div class="col-auto" style="width: 100px;">
+                        <input type="number" name="quantity" id="quantity" class="form-control text-center" value="1" min="1">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-success btn-lg px-4 shadow-sm">
+                            <i class="bi bi-cart-plus"></i> เพิ่มเข้าตะกร้า
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="mt-4">
+                <a href="/" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> กลับไปดูสินค้าอื่น
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-dark text-white fw-bold p-3">
+                    รายละเอียดสินค้าเพิ่มเติม
+                </div>
+                <div class="card-body p-4" style="line-height: 1.8; color: #555; white-space: pre-wrap;">
+                    <%= product.description %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('footer') %> 

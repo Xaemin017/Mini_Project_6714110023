@@ -1,0 +1,67 @@
+<%- include('head') %>
+<%- include('navbar') %>
+
+<div class="container mt-5">
+    <div class="card mx-auto shadow-sm" style="max-width: 700px; border-radius: 15px;">
+        <div class="card-header bg-dark text-white py-3">
+            <h4 class="mb-0"><i class="fas fa-plus-circle"></i> เพิ่มสินค้าใหม่เข้าระบบ</h4>
+        </div>
+        <div class="card-body p-4">
+            <form action="/insert" method="POST" enctype="multipart/form-data">
+                
+                <div class="row">
+                    <div class="col-md-12 form-group mb-3">
+                        <label class="font-weight-bold">ชื่อสินค้า</label>
+                        <input type="text" class="form-control" name="name" placeholder="ระบุชื่อสินค้า" required>
+                    </div>
+<div class="form-group">
+    <label class="font-weight-bold text-primary">ยี่ห้อ / แบรนด์</label>
+    <input type="text" name="brand" class="form-control" list="brandOptions" placeholder="-- พิมพ์ชื่อยี่ห้อ หรือเลือกจากรายการ --" required>
+    
+    <datalist id="brandOptions">
+        <option value="Apple">
+        <option value="Samsung">
+        <option value="Asus">
+        <option value="Logitech">
+        <option value="Dell">
+        <option value="HP">
+        </datalist>
+</div>
+                    <div class="col-md-6 form-group mb-3">
+                        <label class="font-weight-bold">ราคา (บาท)</label>
+                        <input type="number" class="form-control" name="price" placeholder="0.00" required>
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="font-weight-bold">ภาพสินค้า</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="image" id="customFile" required>
+                        <label class="custom-file-label" for="customFile">เลือกไฟล์ภาพ...</label>
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label class="font-weight-bold">รายละเอียดสินค้า</label>
+                    <textarea class="form-control" name="description" rows="4" placeholder="ระบุสรรพคุณหรือรายละเอียดเพิ่มเติม..."></textarea>
+                </div>
+
+                <hr>
+                
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary px-5">
+                        <i class="fas fa-save"></i> บันทึกข้อมูล
+                    </button>
+                    <a href="/manage" class="btn btn-outline-secondary">ยกเลิก</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".custom-file-input").on("change", function() {
+      var fileName = $(this).val().split("\\").pop();
+      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>

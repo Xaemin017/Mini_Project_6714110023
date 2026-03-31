@@ -1,0 +1,45 @@
+<%- include('head') %> <%- include('navbar') %>
+
+<div class="container mt-5">
+    <div class="card mx-auto shadow" style="max-width: 500px; border-radius: 15px; overflow: hidden;">
+        <div class="card-header bg-primary text-white py-3">
+            <h4 class="mb-0"><i class="fas fa-user-edit"></i> แก้ไขข้อมูลสมาชิก</h4>
+        </div>
+        <div class="card-body p-4">
+            <form action="/members/update" method="POST">
+                <input type="hidden" name="id" value="<%= member._id %>">
+
+                <div class="form-group mb-3">
+                    <label class="font-weight-bold">ชื่อสมาชิก:</label>
+                    <input type="text" name="name" class="form-control" value="<%= member.name %>" required>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="font-weight-bold">Email:</label>
+                    <input type="email" name="email" class="form-control" value="<%= member.email %>" required>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="font-weight-bold">เบอร์โทร:</label>
+                    <input type="text" name="phone" class="form-control" value="<%= member.phone %>" required>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label class="font-weight-bold text-danger">ระดับสิทธิ์ (Role):</label>
+                    <select name="role" class="form-control border-danger">
+                        <option value="customer" <%= member.role === 'customer' ? 'selected' : '' %>>Customer</option>
+                        <option value="staff" <%= member.role === 'staff' ? 'selected' : '' %>>Staff</option>
+                        <option value="owner" <%= member.role === 'owner' ? 'selected' : '' %>>Owner (เจ้าของร้าน)</option>
+                    </select>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-success px-4">
+                        <i class="fas fa-save"></i> อัปเดตข้อมูล
+                    </button>
+                    <a href="/members" class="btn btn-outline-secondary px-4">ยกเลิก</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

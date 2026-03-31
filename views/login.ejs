@@ -1,0 +1,118 @@
+<%- include('head') %>
+<style>
+    body {
+        /* พื้นหลังแบบ Gradient ให้ดูมีมิติ */
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 0 !important; /* รีเซ็ต padding จากหน้า head */
+    }
+
+    .login-card {
+        border: none;
+        border-radius: 25px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        overflow: hidden;
+        background-color: #ffffff;
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .login-header {
+        background-color: #343a40;
+        color: white;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .login-header img {
+        height: 50px;
+        margin-bottom: 15px;
+    }
+
+    .form-control {
+        border-radius: 10px;
+        padding: 12px 15px;
+        border: 1px solid #e1e1e1;
+    }
+
+    .form-control:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.1);
+        border-color: #007bff;
+    }
+
+    .btn-login {
+        border-radius: 10px;
+        padding: 12px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        background: #007bff;
+        border: none;
+        transition: all 0.3s;
+    }
+
+    .btn-login:hover {
+        background: #0056b3;
+        transform: translateY(-2px);
+    }
+
+    .error-message {
+        background-color: #fff5f5;
+        color: #e53e3e;
+        padding: 10px;
+        border-radius: 10px;
+        border-left: 4px solid #e53e3e;
+        font-size: 0.9rem;
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="login-card">
+            <div class="login-header">
+                <a href="/">
+                    <img src="/images/home/Etechs.png" alt="ETech Logo" onerror="this.src='https://via.placeholder.com/150x50?text=ETech'">
+                </a>
+                <h4 class="mb-0 font-weight-bold">ยินดีต้อนรับเข้าสู่ระบบ</h4>
+                <p class="small text-muted mb-0 mt-2 text-light opacity-50">กรุณากรอกข้อมูลเพื่อดำเนินการต่อ</p>
+            </div>
+
+            <div class="card-body p-4 p-md-5">
+                <% if (message) { %>
+                    <div class="error-message mb-4">
+                        <i class="fas fa-exclamation-circle mr-2"></i> <%= message %>
+                    </div>
+                <% } %>
+
+                <form action="/login" method="POST">
+                    <div class="form-group mb-4">
+                        <label class="small font-weight-bold text-muted">อีเมล (EMAIL)</label>
+                        <div class="input-group">
+                            <input type="email" name="email" class="form-control" placeholder="example@mail.com" required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="small font-weight-bold text-muted">รหัสผ่าน (PASSWORD)</label>
+                        <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+                    </div>
+
+                    <div class="custom-control custom-checkbox mb-4">
+                        <input type="checkbox" class="custom-control-input" id="rememberMe">
+                        <label class="custom-control-label small text-muted" for="rememberMe">จดจำการใช้งานของฉัน</label>
+                    </div>
+                    <div class="mt-4 text-center">
+    
+                    <div class="text-right mt-2">
+    <a href="/forgot-password" class="small text-muted">ลืมรหัสผ่านใช่หรือไม่?</a>
+</div>
+
+                    <button type="submit" class="btn btn-primary btn-block btn-login shadow-sm">
+                        เข้าสู่ระบบ
+                    </button>
+                    <p class="small text-muted mb-1">ยังไม่มีบัญชี ETech?</p>
+    <a href="/register" class="btn btn-outline-danger btn-sm rounded-pill px-4">สร้างบัญชีใหม่</a>
+</div>
+                </form>

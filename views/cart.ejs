@@ -1,0 +1,101 @@
+<%- include('head') %>
+<%- include('navbar') %>
+
+<div class="container mt-5 mb-5">
+    <div class="card shadow-sm border-0" style="border-radius: 20px; overflow: hidden;">
+        <div class="card-header bg-white py-4 border-bottom">
+            <h3 class="mb-0 text-primary font-weight-bold d-flex align-items-center">
+                <img src="/images/home/cart_icon.png" style="height: 40px;" class="mr-3"> 
+                ตะกร้าสินค้าของคุณ
+            </h3>
+        </div>
+
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="border-0 px-4 py-3">สินค้า</th>
+                            <th class="border-0 text-center py-3">ราคา/ชิ้น</th>
+                            <th class="border-0 text-center py-3" style="width: 150px;">จำนวน</th>
+                            <th class="border-0 text-right py-3 px-4">รวม</th>
+                            <th class="border-0 text-center py-3">จัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% let total = 0; %>
+                        
+                        <% if (typeof session !== 'undefined' && session.cart && session.cart.length > 0) { %>
+                            
+                            <% session.cart.forEach(function(item) { %>
+                                <% total += (item.price * item.quantity); %>
+                                <tr>
+                                    <td class="align-middle px-4 py-4">
+                                        <div class="d-flex align-items-center">
+                                            <div class="font-weight-bold text-dark" style="font-size: 1.1rem;">
+                                                <%= item.name %>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-center text-muted">
+                                        ฿<%= item.price.toLocaleString() %>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <div class="d-inline-block px-3 py-1 bg-light border" style="border-radius: 10px; min-width: 60px;">
+                                            <%= item.quantity %>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-right px-4 font-weight-bold text-primary">
+                                        ฿<%= (item.price * item.quantity).toLocaleString() %>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <a href="/cart/remove/<%= item.id %>" class="btn btn-outline-danger btn-sm border-0" 
+                                           style="border-radius: 10px;" onclick="return confirm('ลบรายการนี้ออกใช่หรือไม่?')">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <% }); %>
+
+                        <% } else { %>
+                            <tr>
+                                <td colspan="5" class="text-center py-5">
+                                    <div class="py-5">
+                                        <i class="fas fa-shopping-basket fa-4x text-light mb-3"></i>
+                                        <h4 class="text-muted">ตะกร้าของคุณยังว่างเปล่า</h4>
+                                        <p class="text-secondary mb-4">ลองไปเลือกดูสินค้าที่น่าสนใจในร้านเราสิ!</p>
+                                        <a href="/" class="btn btn-primary btn-lg shadow-sm" style="border-radius: 50px; padding: 10px 40px;">
+                                            เริ่มช้อปปิ้งเลย
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <% if (typeof session !== 'undefined' && session.cart && session.cart.length > 0) { %>
+        <div class="card-footer bg-white p-4 border-top">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-3 mb-md-0 text-center text-md-left">
+                    <a href="/" class="btn btn-link text-secondary">
+                        <i class="fas fa-chevron-left mr-2"></i> เลือกซื้อสินค้าต่อ
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="h5 text-muted mb-0">ราคารวมทั้งสิ้น:</span>
+                        <span class="h2 text-danger font-weight-bold mb-0">฿<%= total.toLocaleString() %></span>
+                    </div>
+                    <a href="/checkout" class="btn btn-success btn-block btn-lg shadow" style="border-radius: 50px;">
+                        ดำเนินการชำระเงิน <i class="fas fa-credit-card ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</div>
+<%- include('footer') %>

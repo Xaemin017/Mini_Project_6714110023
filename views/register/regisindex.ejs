@@ -1,0 +1,43 @@
+<%- include('../head') %>
+<%- include('../navbar') %>
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh; padding-top: 80px;">
+    <div class="card shadow-lg border-0 p-4" style="width: 100%; max-width: 450px; border-radius: 20px;">
+        <div class="card-body text-center">
+            <h2 class="font-weight-bold text-dark mb-4">สมัครสมาชิก</h2>
+            
+            <% if(locals.error) { %>
+                <div class="alert alert-danger small"><%= error %></div>
+            <% } %>
+
+            <form action="/register" method="POST">
+                <div class="form-group text-left">
+                    <label class="small font-weight-bold">ชื่อ-นามสกุล</label>
+                    <input type="text" name="name" class="form-control rounded-pill" value="<%= locals.data ? data.name : '' %>" required>
+                </div>
+                <div class="form-group text-left">
+                    <label class="small font-weight-bold">อีเมล</label>
+                    <input type="email" name="email" class="form-control rounded-pill" value="<%= locals.data ? data.email : '' %>" required>
+                </div>
+                <div class="form-group text-left">
+                    <label class="small font-weight-bold">เบอร์โทรศัพท์</label>
+                    <input type="text" name="phone" class="form-control rounded-pill" value="<%= locals.data ? data.phone : '' %>" required>
+                </div>
+                <div class="form-group text-left">
+                    <label class="small font-weight-bold">รหัสผ่าน</label>
+                    <input type="password" name="password" class="form-control rounded-pill" required>
+                </div>
+                <div class="form-group text-left">
+                    <label class="small font-weight-bold">ยืนยันรหัสผ่าน</label>
+                    <input type="password" name="confirmPassword" class="form-control rounded-pill" required>
+                </div>
+
+                <button type="submit" class="btn btn-etech btn-block rounded-pill mt-4">ยืนยันการสมัคร</button>
+            </form>
+
+            <p class="mt-3 small">เป็นสมาชิกอยู่แล้ว? <a href="/login" class="text-primary">เข้าสู่ระบบ</a></p>
+        </div>
+    </div>
+</div>
+
+<%- include('../footer') %>

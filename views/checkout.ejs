@@ -1,0 +1,68 @@
+<%- include('head') %>
+<%- include('navbar') %>
+
+<div class="container mt-5 mb-5">
+    <form action="/confirm-order" method="POST">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="card shadow-sm border-0 mb-4" style="border-radius: 15px;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4"><i class="fas fa-shipping-fast text-primary"></i> ข้อมูลการจัดส่ง</h5>
+                        <div class="form-group mb-3">
+                            <label>ชื่อ-นามสกุล ผู้รับ</label>
+                            <input type="text" name="receiverName" class="form-control" value="<%= user.name %>" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>อีเมลติดต่อ</label>
+                            <input type="email" name="receiverEmail" class="form-control" value="<%= user.email %>" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>ที่อยู่จัดส่ง (ระบุให้ชัดเจน)</label>
+                            <textarea name="address" class="form-control" rows="3" placeholder="บ้านเลขที่, ถนน, ตำบล, อำเภอ, จังหวัด, รหัสไปรษณีย์" required></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="card shadow-sm border-0" style="border-radius: 15px;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4"><i class="fas fa-credit-card text-success"></i> เลือกช่องทางชำระเงิน</h5>
+                        
+                        <div class="payment-options">
+                            <label class="d-block p-3 border rounded mb-2 cursor-pointer" style="border-radius: 12px !important;">
+                                <input type="radio" name="paymentMethod" value="bank" checked>
+                                <span class="ml-2 font-weight-bold">โอนผ่านธนาคาร (Bank Transfer)</span>
+                                <img src="https://cdn-icons-png.flaticon.com/512/2830/2830284.png" style="height: 25px; float: right;">
+                            </label>
+
+                            <label class="d-block p-3 border rounded mb-2 cursor-pointer" style="border-radius: 12px !important;">
+                                <input type="radio" name="paymentMethod" value="wallet">
+                                <span class="ml-2 font-weight-bold">Wallet (TrueMoney / ShopeePay)</span>
+                                <img src="https://cdn-icons-png.flaticon.com/512/625/625599.png" style="height: 25px; float: right;">
+                            </label>
+
+                            <label class="d-block p-3 border rounded mb-4 cursor-pointer" style="border-radius: 12px !important;">
+                                <input type="radio" name="paymentMethod" value="paypal">
+                                <span class="ml-2 font-weight-bold">PayPal</span>
+                                <img src="https://cdn-icons-png.flaticon.com/512/174/174861.png" style="height: 25px; float: right;">
+                            </label>
+                        </div>
+
+                        <div class="bg-light p-3 rounded" style="border-radius: 12px;">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>ยอดชำระทั้งสิ้น:</span>
+                                <span class="h4 mb-0 text-danger font-weight-bold">฿<%= total.toLocaleString() %></span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block btn-lg mt-4 shadow" style="border-radius: 50px;">
+                            ยืนยันการชำระเงิน
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<%- include('footer') %>

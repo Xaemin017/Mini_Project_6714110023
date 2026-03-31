@@ -1,0 +1,40 @@
+<%- include('head') %>
+<%- include('navbar') %>
+<div class="container mt-4">
+    <div class="card p-4 shadow-sm" style="border-radius: 15px;">
+        <h2 class="mb-4">แก้ไขสินค้า: <%= product.name %></h2>
+        <form action="/update" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="<%= product.id %>">
+
+            <div class="form-group">
+                <label>ชื่อสินค้า</label>
+                <input type="text" name="name" class="form-control" value="<%= product.name %>">
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="text-muted">ราคาเต็ม (ราคาเดิม)</label>
+                    <input type="number" name="oldPrice" class="form-control" value="<%= product.oldPrice %>">
+                </div>
+                <div class="col-md-6 form-group">
+                    <label class="text-danger font-weight-bold">ราคาขายจริง (ราคาโปรโมชั่น)</label>
+                    <input type="number" name="price" class="form-control" value="<%= product.price %>" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>รายละเอียดสินค้า</label>
+                <textarea name="description" class="form-control" rows="3"><%= product.description %></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>ภาพสินค้า</label>
+                <input type="file" name="image" class="form-control-file">
+                <img src="/images/products/<%= product.image %>" class="mt-2 img-thumbnail" style="width: 150px;">
+            </div>
+
+            <button type="submit" class="btn btn-primary px-5">บันทึกการแก้ไข</button>
+            <a href="/manage" class="btn btn-outline-secondary">ยกเลิก</a>
+        </form>
+    </div>
+</div>

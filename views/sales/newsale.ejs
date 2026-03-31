@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>New Sale</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Add New Sale</h1>
+        <form action="/sales/insert" method="POST">
+            <div class="form-group">
+                <label>Product:</label>
+                <select name="product" required>
+                    <% products.forEach(product=> { %>
+                        <option value="<%= product._id %>">
+                            <%= product.name %> - $<%= product.price %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Member:</label>
+                <select name="member" required>
+                    <% members.forEach(member=> { %>
+                        <option value="<%= member._id %>">
+                            <%= member.name %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Quantity:</label>
+                <input type="number" name="quantity" required min="1">
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn">Submit</button>
+                <a href="/" class="btn-cancel">กลับหน้าแรก</a>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

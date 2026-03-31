@@ -1,0 +1,74 @@
+<%- include('head') %> <%- include('navbar') %>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h2><i class="fas fa-users-cog"></i> จัดการสมาชิก</h2>
+            <p class="text-muted">จัดการระดับสิทธิ์ ลบ หรือแก้ไขข้อมูลพนักงานและลูกค้า</p>
+        </div>
+    </div>
+    
+    <div class="input-group mb-3 shadow-sm">
+        <div class="input-group-prepend">
+            <span class="input-group-text bg-white"><i class="fas fa-search"></i></span>
+        </div>
+        <input type="text" class="form-control" placeholder="ค้นหาด้วยชื่อ หรือ Email...">
+    </div>
+
+    <div class="table-responsive shadow-sm">
+        <table class="table table-hover bg-white border">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ชื่อสมาชิก</th>
+                    <th>Email / เบอร์โทร</th>
+                    <th>สิทธิ์ปัจจุบัน</th>
+                    <th class="text-center">ปรับระดับสิทธิ์ (ภายใน)</th>
+                    <th class="text-center">จัดการ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% members.forEach(function(member) { %>
+                    <tr>
+                        <td class="align-middle font-weight-bold"><%= member.name %></td>
+                        <td class="align-middle">
+                            <small class="d-block text-primary"><%= member.email %></small>
+                            <small class="text-muted"><%= member.phone %></small>
+                        </td>
+                        <td class="align-middle text-center">
+                            <% if(member.role === 'owner') { %>
+                                <span class="badge badge-danger">OWNER</span>
+                            <% } else if(member.role === 'staff') { %>
+                                <span class="badge badge-warning">STAFF</span>
+                            <% } else { %>
+                                <span class="badge badge-secondary">CUSTOMER</span>
+                            <% } %>
+                        </td>
+                        <td class="align-middle text-center">
+                            <form action="/update-role" method="POST" class="form-inline justify-content-center">
+                                <input type="hidden" name="userId" value="<%= member._id %>">
+                                <select name="newRole" class="form-control form-control-sm border-primary mr-2">
+                                    <option value="customer" <%= member.role === 'customer' ? 'selected' : '' %>>Customer</option>
+                                    <option value="staff" <%= member.role === 'staff' ? 'selected' : '' %>>Staff</option>
+                                    <option value="owner" <%= member.role === 'owner' ? 'selected' : '' %>>Owner</option>
+                                </select>
+                                <button type="submit" class="btn btn-outline-primary btn-sm">บันทึก</button>
+                            </form>
+                        </td>
+                        <td class="align-middle text-center">
+                            <div class="btn-group">
+                                <a href="/members/edit/<%= member._id %>" class="btn btn-light btn-sm text-primary" title="แก้ไข">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="/members/delete/<%= member._id %>" 
+                                   class="btn btn-light btn-sm text-danger" 
+                                   onclick="return confirm('ยืนยันการลบสมาชิก?')" title="ลบ">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</div>

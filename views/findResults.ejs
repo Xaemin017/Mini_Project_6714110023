@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h2>📌 ผลการค้นหา</h2>
+        <a href="/findindex" class="btn btn-secondary my-3">🔙 กลับไปค้นหา</a>
+        <div class="row">
+            <% if (products.length> 0) { %>
+                <% products.forEach(product=> { %>
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <img class="card-img-top" src="/images/products/<%= product.image %>"
+                                alt="<%= product.name %>">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%= product.name %>
+                                </h5>
+                                <p class="card-text">💰 ราคา: <%= product.price %> บาท</p>
+                                <p class="card-text">📜 รายละเอียด: <%= product.description %>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <% }); %>
+                        <% } else { %>
+                            <p>❌ ไม่พบสินค้าที่ตรงกับเงื่อนไข</p>
+                            <% } %>
+        </div>
+    </div>
+</body>
+
+</html>

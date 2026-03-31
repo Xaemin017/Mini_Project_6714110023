@@ -1,0 +1,93 @@
+<%- include('head') %>
+<%- include('navbar') %>
+
+<div class="container py-5" style="padding-top: 100px;">
+    <div class="row mb-5">
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm bg-primary text-white p-4 text-center" style="border-radius: 20px;">
+                <p class="mb-1 opacity-75">ยอดขายรวมทั้งหมด</p>
+                <h2 class="font-weight-bold">฿<%= data.totalSales.toLocaleString() %></h2>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm bg-success text-white p-4 text-center" style="border-radius: 20px;">
+                <p class="mb-1 opacity-75">จำนวนคำสั่งซื้อ</p>
+                <h2 class="font-weight-bold"><%= data.totalOrders %> รายการ</h2>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm bg-info text-white p-4 text-center" style="border-radius: 20px;">
+                <p class="mb-1 opacity-75">ยี่ห้อที่ขายดีที่สุด</p>
+                <h2 class="font-weight-bold"><%= (data.topBrands.length > 0) ? data.topBrands[0].name : 'N/A' %></h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm p-4 mb-5" style="border-radius: 20px;">
+        <h5 class="font-weight-bold mb-4">สรุปยอดขายแยกตามยี่ห้อ</h5>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ชื่อยี่ห้อ</th>
+                        <th class="text-right">ยอดขาย (บาท)</th>
+                        <th class="text-center">สัดส่วน</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% data.topBrands.forEach(brand => { 
+                        let percentage = (data.totalSales > 0) ? ((brand.amount / data.totalSales) * 100).toFixed(1) : 0;
+                    %>
+                    <tr>
+                        <td class="font-weight-bold text-primary"><%= brand.name %></td>
+                        <td class="text-right">฿<%= brand.amount.toLocaleString() %></td>
+                        <td>
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar" style="width: <%= percentage %>%;"></div>
+                            </div>
+                            <small><%= percentage %>%</small>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card shadow-sm p-4" style="border-radius: 20px;">
+        <h5 class="font-weight-bold mb-4">ประวัติรายการขายล่าสุด</h5>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>วันที่</th>
+                        <th>สินค้า</th>
+                        <th>ยี่ห้อ</th>
+                        <th class="text-right">ราคา</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% data.recentSales.forEach(sale => { %>
+                    <tr>
+                        <td class="small"><%= new Date(sale.date).toLocaleString('th-TH') %></td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <% if(sale.image) { %>
+                                    <img src="/images/products/<%= sale.image %>" style="width: 40px; height: 40px; object-fit: contain;" class="mr-2">
+                                <% } else { %>
+                                    <div style="width: 40px; height: 40px; background: #eee;" class="mr-2 d-flex align-items-center justify-content-center text-muted small">N/A</div>
+                                <% } %>
+                                <span><%= sale.productName %></span>
+                            </div>
+                        </td>
+                        <td><span class="badge badge-light border"><%= sale.brand %></span></td>
+                        <td class="text-right font-weight-bold">฿<%= sale.price.toLocaleString() %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<%- include('footer') %>

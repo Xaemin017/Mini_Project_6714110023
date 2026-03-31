@@ -1,0 +1,110 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm fixed-top">
+    <div class="container-fluid px-lg-5">
+        <a href="/" class="navbar-brand">
+            <img src="/images/home/Etechs.png" alt="Logo" style="height: 40px;">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav mr-auto align-items-center">
+                
+                <% if (locals.login && locals.user && user.role === 'owner') { %>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-warning dropdown-toggle font-weight-bold" href="#" data-toggle="dropdown">
+                            <i class="fas fa-tools mr-1"></i> ระบบหลังบ้าน
+                        </a>
+                        <div class="dropdown-menu shadow border-0" style="border-radius: 12px;">
+                            <a class="dropdown-item py-2" href="/manage">จัดการสินค้า</a>
+                            <a class="dropdown-item py-2" href="/report">รายงานการขาย</a>
+                            <a class="dropdown-item py-2" href="/members">จัดการสมาชิก</a>
+                        </div>
+                    </li>
+                <% } %>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-light dropdown-toggle" href="#" data-toggle="dropdown">ยี่ห้อ</a>
+                    <div class="dropdown-menu shadow border-0" style="border-radius: 12px;">
+                        <% if (locals.brands && brands.length > 0) { %>
+                            <% brands.forEach(function(brandName) { %>
+                                <a class="dropdown-item py-2" href="/brand/<%= brandName %>"><%= brandName %></a>
+                            <% }) %>
+                        <% } %>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item font-weight-bold text-primary" href="/">ดูทั้งหมด</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-light dropdown-toggle" href="#" data-toggle="dropdown">ทำไมต้อง ETech</a>
+                    <div class="dropdown-menu border-0 shadow-sm" style="border-radius: 12px;">
+                        <a class="dropdown-item py-2" href="/about">เกี่ยวกับเรา</a>
+                        <a class="dropdown-item py-2" href="/verification">ตรวจสอบความถูกต้องสินค้า</a>
+                        <a class="dropdown-item py-2" href="/policy">นโยบายของ ETech</a>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="/join-us">ร่วมงานกับเรา</a>
+                </li>
+
+                <li class="nav-item ml-lg-2">
+                    <a class="nav-link text-danger font-weight-bold" href="/promotions">
+                        <i class="fas fa-fire mr-1"></i> โปรโมชั่น
+                    </a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0 mx-lg-4 d-flex" action="/search-product" method="GET">
+                <div class="input-group">
+                    <input class="form-control border-0 bg-white text-black rounded-left shadow-none" 
+                           type="search" name="q" placeholder="ค้นหาสินค้า..." 
+                           style="width: 400px;">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary rounded-right shadow-none" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <ul class="navbar-nav ml-auto align-items-center">
+                <li class="nav-item mr-3">
+                    <a class="nav-link text-white position-relative d-flex align-items-center" href="/cart">
+                        <img src="/images/home/cart_icons.png" alt="Cart" style="height: 30px; width: auto;">
+                        <span class="ml-2 d-none d-lg-inline">ตะกร้าสินค้า</span> 
+                        <% if (locals.session && session.cart && session.cart.length > 0) { %>
+                            <span class="badge badge-danger position-absolute" 
+                                  style="top: -5px; right: -5px; font-size: 0.7rem; border-radius: 50%; min-width: 18px;">
+                                <%= session.cart.reduce((sum, item) => sum + parseInt(item.quantity), 0) %>
+                            </span>
+                        <% } %>
+                    </a>
+                </li>
+
+                <% if (locals.login && locals.user) { %>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-info dropdown-toggle font-weight-bold" href="#" data-toggle="dropdown">
+                            👤 <%= user.name %> <span class="badge badge-light" style="font-size: 0.6rem;"><%= user.role %></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow border-0" style="border-radius: 12px;">
+                            <a class="dropdown-item text-danger" href="/logout">ออกจากระบบ</a>
+                        </div>
+                    </li>
+                <% } else { %>
+                    <li class="nav-item">
+                        <a class="nav-link text-light btn btn-outline-secondary btn-sm px-4 rounded-pill" href="/login">
+                            <i class="fas fa-sign-in-alt mr-1"></i> เข้าสู่ระบบ
+                        </a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<style>
+    body { padding-top: 70px; }
+</style>
